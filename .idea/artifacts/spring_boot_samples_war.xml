@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="spring-boot-samples:war">
+    <output-path>$USER_HOME$/Desktop/spring-boot-samples/target</output-path>
+    <root id="archive" name="spring-boot-samples-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="spring-boot-samples:war exploded" />
+    </root>
+  </artifact>
+</component>
