@@ -5,6 +5,7 @@ import com.cn.model.entity.User;
 import com.cn.swagger2.API.SuccessModel;
 import com.cn.util.JsonMapper;
 import com.cn.util.StatusBooks;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SecurityInterceptor implements HandlerInterceptor {
 
+    @Value("{login.userFilter}")
+    private boolean LOGIN_USER_FILTER;
+
+    @Value("{jwt.sec}")
+    private String JWT_SEC;
+
+    @Value("{jwt.tokenName}")
+    private String JWT_TOKEN_NAME;
+
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
@@ -29,7 +39,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
         response.addHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-
 
         //验证用户是否登陆
         Object obj = request.getSession().getAttribute("cur_user");
