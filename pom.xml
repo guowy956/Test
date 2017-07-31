@@ -203,7 +203,17 @@
                 <artifactId>shiro-cas</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
-        </dependencies>
+
+            <!-- https://mvnrepository.com/artifact/commons-net/commons-net 断点续传 -->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>3.3</version>
+            </dependency>
+
+
+
+    </dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
