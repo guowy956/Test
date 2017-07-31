@@ -29,17 +29,17 @@ public class MultiTheradDownLoad {
 
     private int threadNum = 0;
 
-//    设置一个计数器，代码内主要用来完成对缓存文件的删除
+    /**设置一个计数器，代码内主要用来完成对缓存文件的删除*/
     private CountDownLatch latch ;
 
     private long fileLength = 0L;
 
     private long threadLength = 0L;
 
-//    保留每个线程下载数据的起始位置
+    /**保留每个线程下载数据的起始位置*/
     private long[] startos;
 
-//    保留每个线程下载数据的截止位置
+    /**保留每个线程下载数据的截止位置*/
     private long[] endPos;
 
     private Boolean bool = false;
@@ -47,7 +47,7 @@ public class MultiTheradDownLoad {
     private URL url;
 
 
-//    有参构造函数，先构造需要的数据
+    /**有参构造函数，先构造需要的数据*/
     public MultiTheradDownLoad(String filepath ,int threadNum){
         this.filepath = filepath;
         this.threadNum = threadNum;
@@ -55,13 +55,13 @@ public class MultiTheradDownLoad {
         endPos  = new long[this.threadNum];
         latch = new CountDownLatch(this.threadNum);
     }
-//    组织断点续传功能实现
+    /**组织断点续传功能实现*/
     public void downloadPart(){
         File file = null;
         File tmpfile = null;
         HttpURLConnection httpcon = null;
 
-//        在请求url内获取文件资源的名称；此处没考虑文件名为空的情况，此种情况可能需使用UUID来生成一个唯一数来代表文件名。
+        /**在请求url内获取文件资源的名称；此处没考虑文件名为空的情况，此种情况可能需使用UUID来生成一个唯一数来代表文件名。*/
         filename = filepath.substring(filepath.lastIndexOf("/")+1,
                 filepath.contains("?") ? filepath.lastIndexOf("?") : filepath.length());
         tmpfilename = filename + "_temp";
