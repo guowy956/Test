@@ -33,10 +33,11 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @MapperScan("com.cn.mapper")
 
-@EnableScheduling
+@EnableScheduling   // 开启定时任务
 @ComponentScan("com.cn")
 @EntityScan("com.cn.model")
 //@EnableJpaRepositories("com.lance.repository")
+
 
 public class App extends WebMvcConfigurerAdapter {
 
