@@ -14,7 +14,7 @@ public class ScheduledTest {
 
 //  规则不同
 //    @Scheduled(cron="* * * * * ?")
-    @Scheduled(fixedRate = 3000)
+//    @Scheduled(fixedRate = 3000)
     public void timerRate() {
         System.out.println(888);
     }
