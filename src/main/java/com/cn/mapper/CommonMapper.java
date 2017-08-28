@@ -31,7 +31,7 @@ public interface CommonMapper<T,S,PK extends Serializable> {
 
     FileUpload selectBYExample(S md5);
 
-    FileUploadSigning selectByPrimaryKey(Long id);
+    FileUploadSigning selectFileUploadSigningByPrimaryKey(Long id);
 
     FileUploadSigning selectByPrimaryByOrderId(String orderId);
 

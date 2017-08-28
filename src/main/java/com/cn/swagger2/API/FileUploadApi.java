@@ -25,17 +25,4 @@ public interface FileUploadApi {
     ResponseEntity<SuccessModel> fileUpdate (@ApiParam(value = "file detail")@RequestPart("file")MultipartFile file);
 
 
-
-    @ApiOperation(value = "文件上传（未进行上传服务器的链接）", notes = "文件上传（未进行上传服务器的链接）",tags = { })
-    @ApiResponses({
-            @ApiResponse(code = 200,message = "Successful response",response = SuccessModel.class),
-            @ApiResponse(code = 200,message = "unexpected error")    })
-    @RequestMapping(value = "file/{orderId}",
-            method = RequestMethod.POST ,
-            produces={"application/json;charset=utf-8"},
-            consumes = {"multipart/form-data"})
-    ResponseEntity<SuccessModel> fileUpdateSign (@ApiParam(value = "file detail")@RequestPart("file")MultipartFile file,
-                                                 @ApiParam(value = "orderId ",required = true)@RequestPart("orderId")String orderId);
-
-
 }

@@ -43,7 +43,7 @@ public abstract class CommonsService<T,S,PK extends Serializable> {
 
 
     public FileUploadSigning selectByPrimaryKey(Long id){
-        return  getMapper().selectByPrimaryKey(id);
+        return  getMapper().selectFileUploadSigningByPrimaryKey(id);
     }
 
     public FileUploadSigning selectByPrimaryByOrderId(String orderId) {

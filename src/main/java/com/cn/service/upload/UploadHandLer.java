@@ -1,13 +1,8 @@
 package com.cn.service.upload;
 
 import com.cn.exception.BadRequestException;
-import com.cn.exception.BusinessException;
-import com.cn.mapper.FileUploadSigningMapper;
 import com.cn.model.entity.FileUpload;
-import com.cn.model.entity.FileUploadSigning;
 import com.cn.service.FileUploadService;
-import com.cn.service.FileUploadSigningService;
-import com.cn.util.MD5Util;
 import com.cn.util.StringUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -45,9 +40,6 @@ public class UploadHandLer {
 
     @Autowired
     FileUploadService fileUploadService;
-
-    @Autowired
-    FileUploadSigningMapper fileUploadSigningMapper;
 
 
     public String getFileUploadSuffix(){
@@ -139,37 +131,5 @@ public class UploadHandLer {
         //fileUploadService.upload(file,uploadEntry.getMd5());
         uploadEntry = fileUploadManager.save(uploadEntry);
         return uploadEntry;
-    }
-
-    public String fileUpdateSign(String orderId, MultipartFile file) {
-        String md5 = null;
-        String fileName = file.getOriginalFilename();
-        String[] args = fileName.split("\\.");
-        String  fileType   = args[0];
-        String  fileSuffix = args[1].toLowerCase();
-
-        try {
-             md5 = MD5Util.getMD5String(file.getBytes());
-            fileUploadManager.upload(file,md5);
-        } catch (IOException e) {
-//            e.printStackTrace();
-            throw new BusinessException("文件上传失败"+e.getMessage());
-        }
-        String pushFileName =  fileName + fileSuffix;
-        FileUploadSigning signing = fileUploadManager.selectByPrimaryKey(orderId);
-        if(signing == null){
-            throw new BusinessException("信息不存在");
-        }
-        if(StringUtil.isNotEmpty(signing.getUploadIouPath())){
-            pushFileName = signing.getUploadIouPath()+"，"+pushFileName;
-        }
-        FileUploadSigning fileUploadSigning = new FileUploadSigning();
-        fileUploadSigning.setUploadIouPath(pushFileName);
-        uploadFileByOrderNum(orderId,fileUploadSigning);
-        return pushFileName;
-    }
-
-    private FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning) {
-       return fileUploadManager.uploadFileByOrderNum(orderId,fileUploadSigning);
     }
 }
