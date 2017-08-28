@@ -1,5 +1,7 @@
 package com.cn.mapper;
 
+import com.cn.model.entity.FileUpload;
+import com.cn.model.entity.FileUploadSigning;
 import com.cn.model.entity.Product;
 import com.cn.model.select.ProductS;
 
@@ -27,4 +29,11 @@ public interface CommonMapper<T,S,PK extends Serializable> {
 
     <T> List<T> getAll();
 
+    FileUpload selectBYExample(S md5);
+
+    FileUploadSigning selectByPrimaryKey(Long id);
+
+    FileUploadSigning selectByPrimaryByOrderId(String orderId);
+
+    FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning);
 }
