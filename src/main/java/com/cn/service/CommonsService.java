@@ -1,11 +1,9 @@
 package com.cn.service;
 
 import com.cn.mapper.CommonMapper;
+import com.cn.model.entity.CustomerScanningCopy;
 import com.cn.model.entity.FileUpload;
 import com.cn.model.entity.FileUploadSigning;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -52,5 +50,30 @@ public abstract class CommonsService<T,S,PK extends Serializable> {
 
     public FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning) {
        return getMapper().uploadFileByOrderNum(orderId,fileUploadSigning);
+    }
+
+    public  List<CustomerScanningCopy> selectByOrderNumAndMd5(String orderNum, String md5) {
+        return getMapper().selectByOrderNumAndMd5(orderNum, md5);
+    }
+
+    public  void uploadCustomerScanningCopy(String orderNum, String md5Hex, String fileSuffix) {
+        System.out.println("链接服务器");
+    }
+
+    public <S> S preview(String orderNum, String md5Hex, String fileSuffix) {
+        System.out.println("链接服务器");
+        return null;
+    }
+
+    public <S> List<CustomerScanningCopy> findFileByOrderNum(String orderNum) {
+        return getMapper().findFileByOrderNum(orderNum);
+    }
+
+    public <S> String getPreviewUrl(String md5,String type) {
+        return null;
+    }
+
+    public <S> S getPreviewThumbnailsUrl(String md5,String type) {
+        return null;
     }
 }

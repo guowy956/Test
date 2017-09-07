@@ -29,4 +29,8 @@ public class ProductService <T,S,PK extends Serializable> extends CommonsService
     public List<Product> getList(String productName,  String brand, String business, Integer maxPrice, Integer minPrice, String productStatus, String productType, RowBounds rowBounds) {
         return getMapper().getList(productName, brand, business, maxPrice, minPrice, productStatus, productType);
     }
+
+    public Product getListById(String productCode){
+        return getMapper().selectByPrimaryKey(productCode);
+    }
 }
