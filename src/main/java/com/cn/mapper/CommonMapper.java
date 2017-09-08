@@ -5,10 +5,12 @@ import com.cn.model.entity.FileUpload;
 import com.cn.model.entity.FileUploadSigning;
 import com.cn.model.entity.Product;
 import com.cn.model.select.ProductS;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.RowBounds;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CommonMapper
@@ -17,7 +19,38 @@ import java.util.List;
  * @create 2017-06-22 10:19
  **/
 
-public interface CommonMapper<T,S,PK extends Serializable> {
+public interface CommonMapper<T,Q,PK extends Serializable> {
+
+    <T> List<T> getAll();
+
+    FileUpload selectBYExample(Q md5);
+
+    FileUploadSigning selectFileUploadSigningByPrimaryKey(Long id);
+
+    FileUploadSigning selectByPrimaryByOrderId(String orderId);
+
+    FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning);
+
+    List<CustomerScanningCopy> selectByOrderNumAndMd5(@Param("orderNum") String orderNum,@Param("fileMd5") String fileMd5);
+
+    List<CustomerScanningCopy> findFileByOrderNum(@Param("orderNum")String orderNum);
+
+//    --------------------------------
+
+    /**
+     * 根据条件查询记录总数
+     */
+    int countByExample(Q example);
+
+    /**
+     * 根据条件删除记录
+     */
+    int deleteByExample(Q example);
+
+    /**
+     * 根据主键删除记录
+     */
+    int deleteByPrimaryKey(PK id);
 
     /**
      * 保存记录,不管记录里面的属性是否为空
@@ -29,17 +62,70 @@ public interface CommonMapper<T,S,PK extends Serializable> {
      */
     int insertSelective(T record);
 
-    <T> List<T> getAll();
+    /**
+     * 批量插入记录
+     */
+    int insertBatch(List<T> records);
 
-    FileUpload selectBYExample(S md5);
+    /**
+     * 根据条件查询记录集
+     */
+    List<T> selectByExample(Q example);
+    /**
+     * 根据条件查询记录集
+     */
+    List<T> selectByExample(RowBounds rowBounds, Q example);
 
-    FileUploadSigning selectFileUploadSigningByPrimaryKey(Long id);
+    List<T> selectByExampleWithBLOBs(RowBounds rowBounds, Q example);
+    /**
+     * 根据主键查询记录
+     */
+    T selectByPrimaryKey(PK id);
 
-    FileUploadSigning selectByPrimaryByOrderId(String orderId);
+    /**
+     * 根据条件更新属性不为空的记录
+     */
+    int updateByExampleSelective(@Param("record") T record, @Param("example") Q example);
 
-    FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning);
+    /**
+     * 根据条件更新记录
+     */
+    int updateByExample(@Param("record") T record, @Param("example") Q example);
 
-    List<CustomerScanningCopy> selectByOrderNumAndMd5(@Param("orderNum") String orderNum,@Param("fileMd5") String fileMd5);
+    /**
+     * 根据主键更新属性不为空的记录
+     */
+    int updateByPrimaryKeySelective(T record);
 
-    List<CustomerScanningCopy> findFileByOrderNum(@Param("orderNum")String orderNum);
+    /**
+     * 根据主键更新记录
+     */
+    int updateByPrimaryKey(T record);
+
+    /**
+     * 获取 序列中下一个编号
+     * @return
+     */
+    Long getNextVal();
+
+    @Select(value = "${sql}")
+    List<Map<String,String>> selectBySQL(@Param(value = "sql") String sql);
+
+    @Select(value = "${sql}")
+    List<Map<String,Object>> findBySQL(@Param(value = "sql") String sql);
+
+    @Select(value = "${sql}")
+    int countBySQL(@Param(value = "sql") String sql);
+
+    @Update(value = "${sql}")
+    int updateBySQL(@Param(value = "sql") String sql);
+
+    //    @Options(flushCache = true, timeout = 20000)
+    @Delete(value = "${sql}")
+    int deleteBySQL(@Param(value = "sql") String sql);
+
+    @Insert(value = "${sql}")
+    int insertBySQL(@Param(value = "sql") String sql);
+
+
 }
