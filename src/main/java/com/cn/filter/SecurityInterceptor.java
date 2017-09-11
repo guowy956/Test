@@ -41,8 +41,8 @@ public class SecurityInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("UTF-8");
 
         //验证用户是否登陆
-        Object obj = request.getSession().getAttribute("cur_user");
-        if (obj == null || !(obj instanceof User)) {
+        Object obj = request.getSession().getAttribute("api");
+        if (obj == null || (obj instanceof User)) {
 //            TODO response.sendRedirect(request.getContextPath() + "/login");
             SuccessModel successModel = new SuccessModel();
             successModel.setCode(401);

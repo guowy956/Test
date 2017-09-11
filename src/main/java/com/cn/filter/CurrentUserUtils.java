@@ -14,7 +14,7 @@ import java.util.Map;
  * 2014-06-14
  */
 public class CurrentUserUtils {
-	private final String CUR_USER = "cur_user";
+	private final String CUR_USER = "api";
 	public static CurrentUserUtils INSTANCE = null;
 	
 	private CurrentUserUtils(){

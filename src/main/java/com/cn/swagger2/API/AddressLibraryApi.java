@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-07T09:32:08.696Z")
-
-@RequestMapping(value = "cur_user")
 @Api(value = "addressLibrary", description = "the addressLibrary API")
+@RequestMapping(value = "/api")
 public interface AddressLibraryApi {
 
     @ApiOperation(value = "创建地址", notes = "创建地址.", response = SuccessModel.class, tags={ "addressLibrary", })
