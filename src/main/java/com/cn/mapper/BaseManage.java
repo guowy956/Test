@@ -18,19 +18,20 @@ import java.util.Map;
 
 public abstract class BaseManage<PK extends Serializable> {
 
-     protected Logger LOGGER =  LoggerFactory.getLogger(getClass());
 
-     private static String DB_NAME = "mysql";
+    protected Logger LOGGER =  LoggerFactory.getLogger(getClass());
 
-     public abstract  <T,Q>CommonsService<T,Q,PK> getService();
+    private static String DB_NAME = "mysql";
 
-     public <T> T findById(PK id){
+    public abstract  <T,Q>CommonsService<T,Q,PK> getService();
+
+    public <T> T findById(PK id){
         try {
             return (T) getService().findByID(id);
         }catch (Exception e){
             throw new DBException("数据库异常--"+e.getMessage());
         }
-     }
+    }
 
     /**
      * 根据指定条件查询唯一对象

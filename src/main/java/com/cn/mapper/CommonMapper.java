@@ -1,10 +1,5 @@
 package com.cn.mapper;
 
-import com.cn.model.entity.CustomerScanningCopy;
-import com.cn.model.entity.FileUpload;
-import com.cn.model.entity.FileUploadSigning;
-import com.cn.model.entity.Product;
-import com.cn.model.select.ProductS;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
@@ -20,22 +15,6 @@ import java.util.Map;
  **/
 
 public interface CommonMapper<T,Q,PK extends Serializable> {
-
-    <T> List<T> getAll();
-
-    FileUpload selectBYExample(Q md5);
-
-    FileUploadSigning selectFileUploadSigningByPrimaryKey(Long id);
-
-    FileUploadSigning selectByPrimaryByOrderId(String orderId);
-
-    FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning);
-
-    List<CustomerScanningCopy> selectByOrderNumAndMd5(@Param("orderNum") String orderNum,@Param("fileMd5") String fileMd5);
-
-    List<CustomerScanningCopy> findFileByOrderNum(@Param("orderNum")String orderNum);
-
-//    --------------------------------
 
     /**
      * 根据条件查询记录总数
@@ -126,6 +105,5 @@ public interface CommonMapper<T,Q,PK extends Serializable> {
 
     @Insert(value = "${sql}")
     int insertBySQL(@Param(value = "sql") String sql);
-
 
 }

@@ -89,7 +89,7 @@ public class UserService {
         System.out.println(token);
         map.put("menus", menus);
         map.put("user", user);
-        CurrentUserUtils.getInstance().serUser(map);
+        CurrentUserUtils.getInstance().setUser(map);
         return ApiResponse.success(map,"登录成功");
     }
 }

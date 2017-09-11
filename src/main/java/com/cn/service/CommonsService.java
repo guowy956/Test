@@ -2,9 +2,6 @@ package com.cn.service;
 
 import com.cn.exception.DBException;
 import com.cn.mapper.CommonMapper;
-import com.cn.model.entity.CustomerScanningCopy;
-import com.cn.model.entity.FileUpload;
-import com.cn.model.entity.FileUploadSigning;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -20,71 +17,7 @@ import java.util.Map;
  * @create 2017-06-22 10:15
  **/
 
-public abstract class CommonsService<T,Q,PK extends Serializable> {
-
-    public abstract CommonMapper<T, Q, PK> getMapper();
-
-    public  int insert(T body) {
-        return insert(body,true);
-    }
-
-    public int insert(T body,boolean isSelective){
-        if(isSelective){
-            return getMapper().insertSelective(body);
-        }else{
-            return getMapper().insert(body);
-        }
-    }
-
-    public List<T> getAll() {
-        return getMapper().getAll();
-    }
-
-    //校验文件是否已经上传
-    public FileUpload fileUploadQuery(Q md5) {
-        return getMapper().selectBYExample(md5);
-    }
-
-
-    public FileUploadSigning selectByPrimaryKey(Long id){
-        return  getMapper().selectFileUploadSigningByPrimaryKey(id);
-    }
-
-    public FileUploadSigning selectByPrimaryByOrderId(String orderId) {
-        return getMapper().selectByPrimaryByOrderId(orderId);
-    }
-
-    public FileUploadSigning uploadFileByOrderNum(String orderId, FileUploadSigning fileUploadSigning) {
-       return getMapper().uploadFileByOrderNum(orderId,fileUploadSigning);
-    }
-
-    public  List<CustomerScanningCopy> selectByOrderNumAndMd5(String orderNum, String md5) {
-        return getMapper().selectByOrderNumAndMd5(orderNum, md5);
-    }
-
-    public  void uploadCustomerScanningCopy(String orderNum, String md5Hex, String fileSuffix) {
-        System.out.println("链接服务器");
-    }
-
-    public <S> S preview(String orderNum, String md5Hex, String fileSuffix) {
-        System.out.println("链接服务器");
-        return null;
-    }
-
-    public <S> List<CustomerScanningCopy> findFileByOrderNum(String orderNum) {
-        return getMapper().findFileByOrderNum(orderNum);
-    }
-
-    public <S> String getPreviewUrl(String md5,String type) {
-        return null;
-    }
-
-    public <S> S getPreviewThumbnailsUrl(String md5,String type) {
-        return null;
-    }
-
-
-//    ------------------------------------------------------------------------------------
+public abstract class CommonsService<T,Q,PK extends Serializable>{
 
     @Transactional(readOnly = true)
     public List<T> findBy(Q query){
@@ -215,5 +148,6 @@ public abstract class CommonsService<T,Q,PK extends Serializable> {
         return getMapper().insertBySQL(sql);
     }
 
+    public abstract CommonMapper<T, Q, PK> getMapper();
 
 }

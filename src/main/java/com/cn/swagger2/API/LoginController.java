@@ -1,9 +1,7 @@
 package com.cn.swagger2.API;
 
-import com.cn.model.entity.ShopAppCustomer;
 import com.cn.model.entity.User;
 import com.cn.model.login.Login;
-import com.cn.service.ShopAppCustomerApiService;
 import com.cn.service.UserService;
 import com.cn.util.MD5;
 import io.swagger.annotations.ApiParam;

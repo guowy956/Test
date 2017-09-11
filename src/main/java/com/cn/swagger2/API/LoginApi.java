@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.NotNull;
 
 /**
- * ShopAppCustomerApi
+ * LoginApi
  *
  * @author guowy
  * @create 2017-05-27 15:05
