@@ -72,4 +72,13 @@ public interface AddressLibraryApi {
     ResponseEntity<SuccessModel> addressLibraryByUserID(@ApiParam(value = "用户ID. ",required=true ) @PathVariable("userId") Long userId);
 
 
+    @ApiOperation(value = "删除地址(批量)", notes = "删除地址(批量).", response = SuccessModel.class, tags={ "addressLibrary", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful response", response = SuccessModel.class),
+            @ApiResponse(code = 202, message = "unexpected error", response = SuccessModel.class) })
+
+    @RequestMapping(value = "/addressLibrary/{idList}",
+            produces = { "application/json" },
+            method = RequestMethod.DELETE)
+    ResponseEntity<SuccessModel> deleteList(@ApiParam(value = "地址id", required = true) @PathVariable("idList") String idList);
 }

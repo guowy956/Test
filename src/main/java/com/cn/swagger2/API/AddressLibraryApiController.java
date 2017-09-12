@@ -47,5 +47,10 @@ public class AddressLibraryApiController extends BaseController implements Addre
         return ApiResponse.success(list,"查询成功");
     }
 
+    public ResponseEntity<SuccessModel> deleteList(@ApiParam(value = "地址id. ",required=true ) @PathVariable("idList") String idList) {
+        addressLibraryManage.deleteList(idList);
+        return ApiResponse.success("删除成功");
+    }
+
 
 }

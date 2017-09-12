@@ -41,4 +41,12 @@ public class AddressLibraryManage extends BaseManage<Long> {
         sql.append("SELECT * FROM address_library WHERE 1=1 ").append("AND user_id = "+userId);
         return getService().findBySQL(sql.toString());
     }
+
+    public void deleteList(String idList) {
+        String[] arrayList = idList.split(",");
+        for(int i =0;i<arrayList.length;i++){
+            String id = arrayList[i];
+            getService().deleteByID(Long.parseLong(id));
+        }
+    }
 }
