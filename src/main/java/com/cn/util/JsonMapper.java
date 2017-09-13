@@ -197,7 +197,7 @@ public class JsonMapper {
     */
 //	public void enableJaxbAnnotation() {
 //		JaxbAnnotationModule module = new JaxbAnnotationModule();
-//		mapper.registerModule(module);
+//		mapper_.registerModule(module);
 //	}
 
    /**

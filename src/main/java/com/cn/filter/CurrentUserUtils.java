@@ -1,13 +1,11 @@
 package com.cn.filter;
 
-import com.cn.model.entity.ShopAppCustomer;
 import com.cn.model.entity.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +14,7 @@ import java.util.Map;
  * 2014-06-14
  */
 public class CurrentUserUtils {
-	private final String CUR_USER = "cur_user";
+	private final String CUR_USER = "api";
 	public static CurrentUserUtils INSTANCE = null;
 	
 	private CurrentUserUtils(){
@@ -62,16 +60,21 @@ public class CurrentUserUtils {
 	public User getUser(){
 		return (User)getSession().getAttribute(CUR_USER);
 	}
+
+	public Map<String,Object> getMapUser(){
+		return (Map<String, Object>) getSession().getAttribute(CUR_USER);
+	}
+
 	
 	/**
 	 * 把当前User对象放置到session里面
 	 * @param user
 	 */
-	public void serUser(User user){
+	public void setUser(User user){
 		getSession().setAttribute(CUR_USER, user);
 	}
 
-	public void serUser(Map<String,Object> map){
+	public void setUser(Map<String,Object> map){
 		getSession().setAttribute(CUR_USER, map);
 		getSession().setMaxInactiveInterval(900);
 	}

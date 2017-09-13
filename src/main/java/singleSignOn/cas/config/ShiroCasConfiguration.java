@@ -2,7 +2,6 @@ package singleSignOn.cas.config;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.jasig.cas.client.util.DelegatingFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
