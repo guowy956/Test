@@ -18,7 +18,7 @@ public class CurrentUserUtils {
 	public static CurrentUserUtils INSTANCE = null;
 	
 	private CurrentUserUtils(){
-		
+
 	}
 	
 	/**
@@ -61,6 +61,10 @@ public class CurrentUserUtils {
 		return (User)getSession().getAttribute(CUR_USER);
 	}
 
+	public Object getUser(String key){
+		return getSession().getAttribute(key);
+	}
+
 	public Map<String,Object> getMapUser(){
 		return (Map<String, Object>) getSession().getAttribute(CUR_USER);
 	}
@@ -76,6 +80,11 @@ public class CurrentUserUtils {
 
 	public void setUser(Map<String,Object> map){
 		getSession().setAttribute(CUR_USER, map);
+		getSession().setMaxInactiveInterval(900);
+	}
+
+	public void setUser(String keyName,String key){
+		getSession().setAttribute(keyName, key);
 		getSession().setMaxInactiveInterval(900);
 	}
 

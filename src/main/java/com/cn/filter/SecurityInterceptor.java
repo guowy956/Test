@@ -1,13 +1,14 @@
 package com.cn.filter;
 
-import com.cn.exception.ServiceException;
 import com.cn.model.entity.User;
 import com.cn.swagger2.API.SuccessModel;
 import com.cn.util.JsonMapper;
-import com.cn.util.StatusBooks;
+import io.jsonwebtoken.Claims;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import singleSignOn.cas.config.jwt.JwtHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,14 +22,16 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SecurityInterceptor implements HandlerInterceptor {
 
-    @Value("{login.userFilter}")
+    @Value("${login.userFilter}")
     private boolean LOGIN_USER_FILTER;
 
-    @Value("{jwt.sec}")
+    @Value("${jwt.sec}")
     private String JWT_SEC;
 
-    @Value("{jwt.tokenName}")
+    @Value("${jwt.tokenName}")
     private String JWT_TOKEN_NAME;
+
+    private final String API = "api";
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -41,9 +44,20 @@ public class SecurityInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("UTF-8");
 
         //验证用户是否登陆
-        Object obj = request.getSession().getAttribute("api");
-        if (obj == null || (obj instanceof User)) {
-//            TODO response.sendRedirect(request.getContextPath() + "/login");
+        Object obj = request.getSession().getAttribute(API);
+
+
+        String token  =  "accessToken";
+        boolean isLogin  = false;
+        String parameter = request.getParameter(token);
+
+        System.out.println();
+        if (StringUtils.isNotBlank(parameter)) {
+            if(parameter.equals("null")){
+                isLogin = true;
+            }
+        }
+        if (isLogin) {
             SuccessModel successModel = new SuccessModel();
             successModel.setCode(401);
             successModel.setMessage("登录失败");
