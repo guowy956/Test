@@ -8,11 +8,11 @@ import com.cn.swagger2.API.SuccessModel;
 import com.cn.util.*;
 import com.cn.util.numUtil.GenerateRandomNumber;
 import com.cn.util.security.jwt.JwtHelper;
-import org.aspectj.apache.bcel.util.ClassLoaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +32,9 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private SysResourceService sysResourceService;
+    @Autowired
+    private SysResourceManage manage;
+
 
     public ResponseEntity<SuccessModel> register(User user) {
         if(user.getIssuer().equals(StatusBooks.IS_SURE_YSE)){
@@ -82,7 +85,7 @@ public class UserService {
             return successModelResponseEntity;
         }
         Map<String,Object> map = new HashMap();
-        List<Map<String, Object>> menus = sysResourceService.getMenus(user.getLoginaccount());
+        List<Map<String, Object>> menus = manage.getMenus(user.getLoginaccount());
         String charAndNumr = GenerateRandomNumber.getCharAndNumr(5);
         String token = JwtHelper.createJWT(user.getLoginaccount(), 10000, charAndNumr);
         map.put("token", token);

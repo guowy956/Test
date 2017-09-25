@@ -24,6 +24,6 @@ public interface SysResourceAPI {
             @ApiResponse(code = 200, message = "unexpected error", response = SuccessModel.class) })
     @RequestMapping(value = "sysResource/menuTree"
             ,method = RequestMethod.GET)
-    ResponseEntity<SuccessModel> menuTree();
+    ResponseEntity<SuccessModel> menuTree(Long roleId);
 
 }

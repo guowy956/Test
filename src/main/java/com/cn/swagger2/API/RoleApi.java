@@ -1,6 +1,6 @@
 package com.cn.swagger2.API;
 
-import com.cn.model.entity.Role;
+import com.cn.model.domain.Role;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

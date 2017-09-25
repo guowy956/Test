@@ -1,14 +1,11 @@
 package com.cn.filter;
 
-import com.cn.model.entity.User;
 import com.cn.swagger2.API.SuccessModel;
 import com.cn.util.JsonMapper;
-import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import singleSignOn.cas.config.jwt.JwtHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
