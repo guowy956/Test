@@ -28,7 +28,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
     @Value("${jwt.tokenName}")
     private String JWT_TOKEN_NAME;
 
-    private final String API = "api";
+    private final String API = "/api";
 
     @Override
     public boolean preHandle(HttpServletRequest request,
